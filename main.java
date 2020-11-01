@@ -7,8 +7,13 @@
 */
 public class main {
 
+			public int high = 2;
+			public int L2 = 1;
+			public int L3 = 0;
+
+
 	/*
-	* Function to Calcuate turnaround time
+	* Function to Calcuate waitting time
 	* @params process
 	* @params size
 	* @params burst: an array of burst time
@@ -16,7 +21,16 @@ public class main {
 	* @params quantum
 	*/
 	public void waitingTime(int process[], int size, int burst[], int wait[], int quantum){
-		//Calcualte turnaround time
+		//Calcualte turnaround time for high
+		//first come first serve
+		while(high > L2 && high > L3){
+				//first process wait time is 0
+				wait[0] = 0;
+				for(int i =1; i < size; i++){
+					wait[i] = burst[i -1] + wait[i - 1];
+				}
+		}
+		// NOT DONE for Round robin
 
 	}
 
