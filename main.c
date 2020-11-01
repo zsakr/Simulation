@@ -8,17 +8,14 @@
 
 #include<stdio.h>
 
-
-
-
-	/*
-	* Function to Calcuate waitting time
-	* @params process
-	* @params size
-	* @params burst: an array of burst time
-	* @params waiting: an array of the waiting time
-	* @params quantum
-	*/
+/*
+* Function to Calcuate waitting time
+* @params process
+* @params size
+* @params burst: an array of burst time
+* @params waiting: an array of the waiting time
+* @params quantum
+*/
 	void waitingTime(int process[], int size, int burst[], int wait[], int quantum){
 		//Calcualte turnaround time for high
 		//first come first serve
@@ -32,14 +29,14 @@
 
 	}
 
-	/*
-	* Function to Calcuate turnaround time
-	* @params process
-	* @params size
-	* @params burst: an array of burst time
-	* @params waiting: an array of the waiting time
-	* @params total an array to store the sum
-	*/
+/*
+* Function to Calcuate turnaround time
+* @params process
+* @params size
+* @params burst: an array of burst time
+* @params waiting: an array of the waiting time
+* @params total an array to store the sum
+*/
 	void TurnAroundTime(int process[], int size, int burst[], int wait[], int total_turnaround[]){
 		//Calcualte turnaround time
 		for(int i = 0; i < size; i++){
@@ -47,12 +44,12 @@
 		}
 	}
 
-	/*
-	* Function to Calcuate average waiting time of waittime and turnaround
-	* @params process
-	* @params size
-	* @params burst: an array of burst time
-	*/
+/*
+* Function to Calcuate average waiting time of waittime and turnaround
+* @params process
+* @params size
+* @params burst: an array of burst time
+*/
 	void AverageWaitTime(int process[], int size, int burst[]){
 		//initializing variables
 		int wait[size];
@@ -67,11 +64,10 @@
 		///turnaround time
 		TurnAroundTime(process, size, burst, wait, turnaroundTime);
 
-	// Driver code
-	int main()
-	{
 
-	}
+int main(){
+
+}
 
 
 
