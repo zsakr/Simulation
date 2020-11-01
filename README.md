@@ -1,5 +1,54 @@
 # System Simulation
 
+#To do 
+---------------------------
+Switch from Java to C
+need:
+- struct for processes
+	 - total ready queue waiting time 
+	 - calculate turnaround time when it exit
+ 
+HP, LP1, LP2 are all going to be queues implemented as arrays
+Array of processes to check if input time is same as clock time
+
+# Functions Needed:
+	- WaitTime
+		- Calculate waiting time for processes RoundRobin and FCFS
+	- turnaround (Done I think)
+		- calculate turnaround time
+	- toalAvgTime
+		- caluclate the total avg time for waitTime and turnaround time
+	- pick proc 
+	 - decide which process need to be run
+	- ready:
+	 - checks whether the process is ready or not to run
+	 - And then put it on the queue 
+	- unready
+	 - check whether the process is not ready to run or not
+	- sched
+	
+	- In Main:
+		- Gant chart
+---------------------------
+
+# To do list Monday:
+
+1- do structs
+2- figure out how to handle from input
+3- Start working on function 
+ - Ziad:
+ 	- WaitTime
+	- Turnaround
+	- TotalAvgTime
+	- Handle reading from file to structs
+ - Aadiv:
+ 	- Structs
+	- Queues
+ 
+
+
+# Explanation of program:
+
 Each program is to be the effort of the team members submitting it.  Team members may help each other, but no other individual, in the class or not, should be assisting with designing or writing the code or test cases.
 *********************************************************************
 CPSC 315
