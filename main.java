@@ -5,6 +5,9 @@
 * @authors Ziad Sakr, Aadiv Sheth
 * @Date: Sunday November 1st 2020
 */
+import java.io.*;
+import java.util.*;
+
 public class main {
 
 			public int high = 2;
@@ -50,14 +53,29 @@ public class main {
 	}
 
 
+	/*
+	* Function to read file
+	*/
+	public static void readFile(){
+		try {
+			Scanner scanner = new Scanner(new File("input.txt"));
+			while(scanner.hasNextLine()){
+					System.out.println(scanner.nextLine());
 
+			}
+
+			scanner.close();
+		} catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+	}
 
 	/*
 	* Main Function
 	*/
 
 	public static void main(String[] args) {
-
+			readFile();
 
 
 
