@@ -2,7 +2,12 @@
 
 #To do 
 ---------------------------
+Final attemp:
+switch from C to java
+
+----
 Switch from Java to C
+
 need:
 - struct for processes
 	 - total ready queue waiting time 
