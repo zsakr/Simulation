@@ -11,12 +11,13 @@ public class Process {
 
 	int out_time;
 	int wait_time;
-	int turnaround_time;
+	// int turnaround_time;
 
 	public Process() {
 		state = "READY";
 		run_till = -1;
 		block_till = -1;
+		wait_time = 0;
 	}
 
 	public int turnaroundTime() {
