@@ -10,9 +10,17 @@ import java.util.*;
 
 public class main {
 
-			public int high = 2;
-			public int L2 = 1;
-			public int L3 = 0;
+	public static int MAX_BURST = 20;
+	public static String high = "HP";
+	public static int low = "LP";
+
+	public int L2quant;
+	public int L3quant;
+
+	private SinglyLinkedList<Process> Processes = new SinglyLinkedList<>(); 
+	private SinglyLinkedList<Process> HP = new SinglyLinkedList<>(); 
+	private SinglyLinkedList<Process> LP2 = new SinglyLinkedList<>(); 
+	private SinglyLinkedList<Process> LP3 = new SinglyLinkedList<>(); 
 
 
 	/*
@@ -23,7 +31,7 @@ public class main {
 	* @params waiting: an array of the waiting time
 	* @params quantum
 	*/
-	public void waitingTime(int process[], int size, int burst[], int wait[], int quantum){
+	public void waitingTime(int process[], int size, int burst[], int wait[], int quantum) {
 		//Calcualte turnaround time for high
 		//first come first serve
 		while(high > L2 && high > L3){
@@ -34,7 +42,6 @@ public class main {
 				}
 		}
 		// NOT DONE for Round robin
-
 	}
 
 	/*
@@ -45,9 +52,9 @@ public class main {
 	* @params waiting: an array of the waiting time
 	* @params total an array to store the sum
 	*/
-	public void findTurnAroundTime(int process[], int size, int burst[], int wait[], int total[]){
+	public void findTurnAroundTime(int process[], int size, int burst[], int wait[], int total[]) {
 		//Calcualte turnaround time
-		for(int i = 0; i < size; i++){
+		for(int i = 0; i < size; i++) {
 			total[i] = burst[i] + wait[i];
 		}
 	}
@@ -56,16 +63,45 @@ public class main {
 	/*
 	* Function to read file
 	*/
-	public static void readFile(){
+	public static void readFile() {
 		try {
 			Scanner scanner = new Scanner(new File("input.txt"));
-			while(scanner.hasNextLine()){
+
+			L2quant = scanner.nextInt();
+			scanner.nextLine()
+
+			L3quant = scanner.nextInt();
+			scanner.nextLine()
+
+			while(scanner.hasNextLine()) {
+				while(sc.next().equals("-1") != 0) {
+					Process P = new Process();
+					
+					P.name = sc.next().charAt(0);
+					sc.nextLine();
+					
+					P.priority = sc.next();
+					sc.nextLine();
+					
+					P.in_time = sc.nextInt();
+					sc.nextLine();
+					
+					int arr[] = new int[MAX_BURST];
+					for (int i=0; i<MAX_BURST; i++) {
+						arr[i] = sc.nextInt();
+						sc.nextLine();
+					}
+					P.burst_info = arr;
+
+					Processes.add(P);
+
 					System.out.println(scanner.nextLine());
+				}
 
 			}
 
 			scanner.close();
-		} catch(FileNotFoundException e){
+		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
@@ -76,11 +112,5 @@ public class main {
 
 	public static void main(String[] args) {
 			readFile();
-
-
-
-
  	}
-
-
 }
