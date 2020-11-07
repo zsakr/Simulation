@@ -11,16 +11,21 @@ import java.util.*;
 public class main {
 
 	public static int MAX_BURST = 20;
-	public static String high = "HP";
-	public static int low = "LP";
 
-	public int L2quant;
-	public int L3quant;
+	public static int high = 2;
+	public static int L2 = 1;
+	public static int L3 = 0;
 
-	private SinglyLinkedList<Process> Processes = new SinglyLinkedList<>(); 
-	private SinglyLinkedList<Process> HP = new SinglyLinkedList<>(); 
-	private SinglyLinkedList<Process> LP2 = new SinglyLinkedList<>(); 
-	private SinglyLinkedList<Process> LP3 = new SinglyLinkedList<>(); 
+	public static String high_stuff = "HP";
+	public static String low = "LP";
+
+	public static int L2quant;
+	public static int L3quant;
+
+	private static SinglyLinkedList<Process> Processes = new SinglyLinkedList<>(); 
+	private static SinglyLinkedList<Process> HP = new SinglyLinkedList<>(); 
+	private static SinglyLinkedList<Process> LP2 = new SinglyLinkedList<>(); 
+	private static SinglyLinkedList<Process> LP3 = new SinglyLinkedList<>(); 
 
 
 	/*
@@ -68,32 +73,32 @@ public class main {
 			Scanner scanner = new Scanner(new File("input.txt"));
 
 			L2quant = scanner.nextInt();
-			scanner.nextLine()
+			scanner.nextLine();
 
 			L3quant = scanner.nextInt();
-			scanner.nextLine()
+			scanner.nextLine();
 
 			while(scanner.hasNextLine()) {
-				while(sc.next().equals("-1") != 0) {
+				while(!scanner.next().equals("-1")) {
 					Process P = new Process();
 					
-					P.name = sc.next().charAt(0);
-					sc.nextLine();
+					P.name = scanner.next().charAt(0);
+					scanner.nextLine();
 					
-					P.priority = sc.next();
-					sc.nextLine();
+					P.priority = scanner.next();
+					scanner.nextLine();
 					
-					P.in_time = sc.nextInt();
-					sc.nextLine();
+					P.in_time = scanner.nextInt();
+					scanner.nextLine();
 					
 					int arr[] = new int[MAX_BURST];
 					for (int i=0; i<MAX_BURST; i++) {
-						arr[i] = sc.nextInt();
-						sc.nextLine();
+						arr[i] = scanner.nextInt();
+						scanner.nextLine();
 					}
 					P.burst_info = arr;
 
-					Processes.add(P);
+					Processes.addLast(P);
 
 					System.out.println(scanner.nextLine());
 				}
