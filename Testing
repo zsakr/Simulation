@@ -1,0 +1,52 @@
+A in at 0 =  5
+B in at 5 = 3 2 3 1 4
+
+HP - 
+LP2 - B
+
+AAA**|BBBAA|AAABB|B**BB|B*BBB|B
+
+3
+6
+A
+HP
+0
+3
+4
+5
+-1
+B
+LP
+5
+6
+2
+3
+1
+4
+-1
+C
+LP
+7
+12
+3
+8
+1
+4
+-1
+
+
+A in at 0 = 3 4 5
+B in at 5 = 6 2 3 1 4
+C in at 7 = 12 3 8 1 4
+
+HP   = 
+LP2  = 
+LP3  = 
+
+Blcok= 
+
+GC   = AAA**|BBBAA|AAACC|CBBBC|CCBBB|CCCBB|BBCCC|***CC|CCCCC|C*CCCC
+
+A_wt = 
+B_wt = 
+C_wt = 
