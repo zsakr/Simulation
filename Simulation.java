@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Simulation {
     static ArrayList<Process> ProcessesList = new ArrayList<Process>();//In list
         
-    static ArrayList<Process> HP = new ArrayList<Process>();//High priority list
-    static ArrayList<Process> LP2 = new ArrayList<Process>();//first low priority list
-    static ArrayList<Process> LP3 = new ArrayList<Process>();//second low priority list
+    static ArrayList<Process> H1 = new ArrayList<Process>();//High priority list
+    static ArrayList<Process> L2 = new ArrayList<Process>();//first low priority list
+    static ArrayList<Process> L3 = new ArrayList<Process>();//second low priority list
     static ArrayList<Process> Blocked = new ArrayList<Process>();//blocked queue
     static ArrayList<Character> ganntChart = new ArrayList<Character>(); //gannt chart list
 
@@ -22,8 +22,8 @@ public class Simulation {
 
     static String high = "HP";
     static String low = "LP";
-    static String low2 = "LP2";
-    static String low3 = "LP3";
+    static String low2 = "L2";
+    static String low3 = "L3";
 
     static int inL3;
     static int L2quant = 0;
@@ -42,7 +42,7 @@ public class Simulation {
             readFile(file);
 
             //run simulation
-            while (clockTick < 60) {
+            while (true) {
                 clockTick++;
                 CheckNewJobs(clockTick);
                 BlockedJobReturnCheck(clockTick);
@@ -50,12 +50,19 @@ public class Simulation {
                 QuantumCheck(clockTick);
                 PickProcess(clockTick);
                 UpdateWaitingTime();
+
                 if (CheckExit())
                     break;
                 UpdateGanntChart();
             }
             Output();
         }
+    }
+
+    public static void print(ArrayList<Process> list) {
+        for (int i=0; i<list.size(); i++) 
+            System.out.print(list.get(i).name + " ");
+        System.out.println();
     }
 
     public static void readFile(File file) {
@@ -106,12 +113,12 @@ public class Simulation {
             if (p.in_time == clockTick) {
                 if (p.priority.equals(high)) {
                     p.state = ready;
-                    HP.add(p);
+                    H1.add(p);
                 }
                 else {
                     p.state = ready;
                     p.priority = low2;
-                    LP2.add(p);
+                    L2.add(p);
                 }
             }
         }
@@ -125,17 +132,15 @@ public class Simulation {
                     if (p.priority.equals(high)) {
                         p.state = ready;
                         p.burst_index++;
-                        HP.add(p);
-                    }
-                    else if (p.priority.equals(low2)) {
-                        p.state = ready;
-                        p.burst_index++;
-                        LP2.add(p);
+                        H1.add(p);
+                        Blocked.remove(i);
                     }
                     else {
                         p.state = ready;
-                        p.burst_index++;  
-                        LP3.add(p);
+                        p.burst_index++;
+                        p.priority = low2;
+                        L2.add(p);
+                        Blocked.remove(i);
                     }
                 }
             }
@@ -174,11 +179,11 @@ public class Simulation {
                     cur_running.state = ready;
                     if (cur_running.num_preempted == MAX_PREEMPTED) {
                         cur_running.priority = low3;
-                        LP3.add(cur_running);
+                        L3.add(cur_running);
                         cur_running = null;
                     }
                     else {
-                        LP2.add(cur_running);
+                        L2.add(cur_running);
                         cur_running = null;
                     }
                 }
@@ -187,7 +192,7 @@ public class Simulation {
                 if (cur_running.run_time == L3quant) {
                     cur_running.burst_info[cur_running.burst_index] -= L3quant;
                     cur_running.state = ready;
-                    LP3.add(cur_running);
+                    L3.add(cur_running);
                     cur_running = null;
                 }
             }
@@ -196,23 +201,23 @@ public class Simulation {
 
     public static void PickProcess(int clockTick) {
         if (cur_running == null) {
-            if (!HP.isEmpty()) {
-                cur_running = HP.remove(0);
+            if (!H1.isEmpty()) {
+                cur_running = H1.remove(0);
                 cur_running.state = running;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
                 //ganntChart.add(cur_running.name);
             }
 
-            else if (!LP2.isEmpty()) {
-                cur_running = LP2.remove(0);
+            else if (!L2.isEmpty()) {
+                cur_running = L2.remove(0);
                 cur_running.state = running;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
                 //ganntChart.add(cur_running.name);
             }
-            else if (!LP3.isEmpty()) {
-                cur_running = LP3.remove(0);
+            else if (!L3.isEmpty()) {
+                cur_running = L3.remove(0);
                 cur_running.state = running;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
