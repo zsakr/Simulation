@@ -7,8 +7,8 @@ public class Simulation {
     // Constant Variables
     static final int MAX_BURST = 20;            // Maximum CPU bursts and blocks a process can have
     static final int MAX_PREEMPTED = 3;         // Maximum number of times a process can be preempted before it is demoted
-    static final int GC_LINE_SIZE = 40;         // Maximum CPU bursts and blocks a process can have
-    static final int GC_FORMAT = 5;             // Maximum CPU bursts and blocks a process can have
+    static final int GC_FORMAT = 5;             // Formatting scheme for Gannt Chart
+    static final int GC_LINE_SIZE = 40;         // Maximum number of clock ticks to be output on one line of the Gannt Chart
     static final char CPU_Idle = '*';           // Symbol for Gannt Chart when the CPU is Idle
     static final String HIGH = "HP";            // Key for Process with High Priority/on H1 Queue
     static final String LOW = "LP";             // Key for Process with Low Priority
@@ -207,7 +207,6 @@ public class Simulation {
                 cur_running.state = RUNNING;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
-                //ganntChart.add(cur_running.name);
             }
 
             else if (!L2.isEmpty()) {
@@ -215,17 +214,13 @@ public class Simulation {
                 cur_running.state = RUNNING;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
-                //ganntChart.add(cur_running.name);
             }
             else if (!L3.isEmpty()) {
                 cur_running = L3.remove(0);
                 cur_running.state = RUNNING;
                 cur_running.run_till = clockTick + cur_running.burst_info[cur_running.burst_index];
                 cur_running.run_time = 0;
-              //  ganntChart.add(cur_running.name);
             }
-            //else 
-                //ganntChart.add(CPU_Idle);
         }
     }
 
@@ -258,9 +253,9 @@ public class Simulation {
         double total_time = ganntChart.size();
         for (int i=0; i<total_time; i++) {
             char ch = ganntChart.get(i);
-            if (i%5 == 0 && i>0)
+            if (i%GC_FORMAT == 0 && i>0)
                 gaant += "|";
-            if (i == 40)
+            if (i == GC_LINE_SIZE)
                 gaant += "\n";
             gaant += ch;
 
