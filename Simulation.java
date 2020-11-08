@@ -1,3 +1,17 @@
+/**
+* Simulation class that implements the systems simulation
+* Project 1: Operating System Simulation
+* CPSC 315: Systems Software
+* @professor Dr.S
+* @author Ziad Sakr, Aadiv Sheth
+* @Start Date: Friday October 30th 2020
+* @modified: Sunday Novemeber 8th 2020
+*/
+
+/**
+* Simulation Class
+* Start of the system simulation implementation
+*/
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -35,6 +49,15 @@ public class Simulation {
     static int L2quant = 0;     // Quantime Size for L2 Queue
     static int L3quant = 0;     // Quantime Size for L3 Queue
 
+
+    /**
+    * Main Method that reads the file name from the command line.
+    * Precondition 'args[0]' should contain the input file name
+    * @param              args the command line arguments
+    * @return             file name
+    * @return             Exectues all the methods
+    * @throws Exception   if no file name passed in the command line
+    */
     public static void main(String args[])throws Exception {
         // Check if input file was not passed as an argument in command line
         if (args.length == 0) {
@@ -66,9 +89,14 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function readFile to read file from the command line
+    * Reading the file using scanner
+    * @param              file of type File
+    */
     public static void readFile(File file) {
         try {
-            Scanner scanner = new Scanner(file);    // Scanner object 
+            Scanner scanner = new Scanner(file);    // Scanner object
 
             L2quant = scanner.nextInt();
             scanner.nextLine();
@@ -78,16 +106,16 @@ public class Simulation {
 
             while(scanner.hasNextLine()) {
                 Process P = new Process();
-                    
+
                 P.name = scanner.next().charAt(0);
                 scanner.nextLine();
-                
+
                 P.priority = scanner.next();
                 scanner.nextLine();
-                    
+
                 P.in_time = scanner.nextInt();
                 scanner.nextLine();
-                    
+
                 int arr[] = new int[MAX_BURST];
                 for (int i=0; i<MAX_BURST; i++) {
                     arr[i] = scanner.nextInt();
@@ -108,6 +136,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function CheckNewJobs that takes one paramater and return none
+    * Checking the new jobs by checking if any new jobs are enterning the system
+    * @param              clockTick of type integer
+    */
     public static void CheckNewJobs(int clockTick) {
         for (int i=0; i<ProcessesList.size(); i++) {
             Process p = ProcessesList.get(i);
@@ -125,6 +158,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function BlockedJobReturnCheck that takes one paramater and return none
+    * Checking if the Process Job is block
+    * @param              clockTick of type integer
+    */
     public static void BlockedJobReturnCheck(int clockTick) {
         for (int i=0; i<Blocked.size(); i++) {
             Process p = Blocked.get(i);
@@ -148,6 +186,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function CPUJobDoneCheck that takes one paramater and return none
+    * Checking if the CPU burst done
+    * @param              clockTick of type integer
+    */
     public static void CPUJobDoneCheck(int clockTick) {
         if (cur_running != null) {
             if (cur_running.run_till == clockTick) {
@@ -171,6 +214,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function QuantumCheck that takes one paramater and return none
+    * Checking the quantum for L2 and L3
+    * @param              clockTick of type integer
+    */
     public static void QuantumCheck(int clockTick) {
         if (cur_running != null) {
             if (cur_running.priority.equals(LOW2)) {
@@ -200,6 +248,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function PickProcess that takes one paramater and return none
+    * To pick a process to run on the CPU if the process is idle
+    * @param              clockTick of type integer
+    */
     public static void PickProcess(int clockTick) {
         if (cur_running == null) {
             if (!H1.isEmpty()) {
@@ -224,6 +277,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function UpdateWaitingTime that takes no paramater and return none
+    * Function update waiting time for the process
+    * @param              none
+    */
     public static void UpdateWaitingTime() {
         for (int i=0; i<ProcessesList.size(); i++) {
             Process p = ProcessesList.get(i);
@@ -232,6 +290,11 @@ public class Simulation {
         }
     }
 
+    /**
+    * Function UpdateGanntChart that takes no paramater and return none
+    * Function update the gant chart
+    * @param              none
+    */
     public static void UpdateGanntChart() {
         if (cur_running == null)
             ganntChart.add(CPU_Idle);
@@ -239,6 +302,13 @@ public class Simulation {
             ganntChart.add(cur_running.name);
     }
 
+    /**
+    * Function CheckExit that takes no paramater and return none
+    * Function to check if every process is done running on the system
+    * @param              none
+    * @return             True if it is done running
+    * @return             False otherwise
+    */
     public static boolean CheckExit() {
         boolean b = true;
         for (int i=0; i<ProcessesList.size(); i++)
@@ -247,6 +317,12 @@ public class Simulation {
         return b;
     }
 
+    /**
+    * Function print that takes no paramater and return none
+    * To print the waitingTime, turnaround time for every process in the system
+    * print the total average turnaroundtime, total wait time, CPU utilzation, and throughput for every process.
+    * @param              none
+    */
     public static void Print() {
         String gaant = "";
         double idle_time = 0;
@@ -287,3 +363,7 @@ public class Simulation {
         System.out.println("\nThroughput: " + num_processes + " Jobs/" + (int)total_time + " Units\n");
     }
 }
+
+/**
+* End of project
+*/
