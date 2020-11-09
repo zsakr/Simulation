@@ -5,12 +5,14 @@
  * @author Ziad Sakr
  * @author Aadiv Sheth
  * @Start Date: October 30th 2020
- * @Last modified: Novemeber 8th 2020
+ * @Last modified: November 8th 2020
  */
 
 /**
  * File: Simulation.java
  * This class implements the system simulation
+ * 
+ * Note: The input file needs to have a blank line at the end.
  */
 
 import java.io.*;
